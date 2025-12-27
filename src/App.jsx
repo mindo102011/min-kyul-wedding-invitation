@@ -1,6 +1,7 @@
 import { useScroll, useTransform, motion } from 'framer-motion'
-import { useState, useEffect, useCallback, memo } from 'react'
+import { useState, useEffect, useCallback, memo, useRef } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
+import confetti from 'canvas-confetti'
 
 function getGreeting() {
   if (typeof window === 'undefined') return null
@@ -35,12 +36,69 @@ const galleryImages = [
   '/images/gallery9.jpg',
 ]
 
+// 빵빠레(컨페티) 효과 함수 - 화면 하단에서 위로 터짐
+function fireConfetti() {
+  const colors = ['#ff69b4', '#ffd700', '#ff6347', '#00ced1', '#9370db', '#ffb6c1', '#98d8c8', '#f7dc6f']
+
+  confetti({
+    particleCount: 150,
+    spread: 100,
+    origin: { x: 0.5, y: 1 },
+    colors: colors,
+    startVelocity: 45,
+    gravity: 0.7,
+    ticks: 600,
+    decay: 0.94,
+    scalar: 1.2,
+    drift: 0,
+    zIndex: 100,
+  })
+
+  setTimeout(() => {
+    confetti({
+      particleCount: 80,
+      spread: 70,
+      origin: { x: 0.2, y: 1 },
+      colors: colors,
+      startVelocity: 40,
+      gravity: 0.7,
+      ticks: 600,
+      decay: 0.94,
+      scalar: 1.1,
+      zIndex: 100,
+    })
+    confetti({
+      particleCount: 80,
+      spread: 70,
+      origin: { x: 0.8, y: 1 },
+      colors: colors,
+      startVelocity: 40,
+      gravity: 0.7,
+      ticks: 600,
+      decay: 0.94,
+      scalar: 1.1,
+      zIndex: 100,
+    })
+  }, 100)
+}
+
 function App() {
   const [fontsLoaded, setFontsLoaded] = useState(false)
   const [galleryLoaded, setGalleryLoaded] = useState(false)
+  const confettiFiredRef = useRef(false)
   const { scrollYProgress } = useScroll()
 
   const isReady = fontsLoaded && galleryLoaded
+
+  useEffect(() => {
+    if (isReady && !confettiFiredRef.current) {
+      confettiFiredRef.current = true
+      const timer = setTimeout(() => {
+        fireConfetti()
+      }, 1800) // 글자 애니메이션 완료 시점
+      return () => clearTimeout(timer)
+    }
+  }, [isReady])
 
   const containerVariants = {
     hidden: { opacity: 1 },
@@ -112,18 +170,18 @@ function App() {
 
   return (
     <div className='flex justify-center w-full min-h-screen'>
-      <div className='w-full flex flex-col items-center max-w-[640px]'>
-        <div className='relative w-full h-screen sm:h-auto'>
+      <div className='w-full flex flex-col items-center max-w-[640px] h-screen'>
+        <div className='relative w-full bg-[#f5f0eb]'>
           {/* 이미지 */}
           <img
             src='/images/32 0Q0A7334a.jpg'
-            className='object-cover object-[80%_center] w-full h-full sm:object-contain sm:h-auto'
+            className='object-contain object-[80%_center] w-full h-full sm:object-contain'
             alt='이미지'
           />
 
           {/* 이미지 위 텍스트 - Our Wedding Day */}
           <motion.div
-            className='absolute text-center text-yellow-200 top-[27%] sm:top-[22%] md:top-48 left-0 right-0 mx-auto w-full'
+            className='absolute text-center text-yellow-200 top-[27%] left-0 right-0 mx-auto w-full'
             variants={containerVariants}
             initial='hidden'
             animate='visible'
@@ -145,7 +203,7 @@ function App() {
 
           <img
             src='/images/people.png'
-            className='absolute bottom-[-0.1%] sm:bottom-[-0.2%] right-[5%] sm:right-[7.2%] w-[47%] sm:w-[40%] h-auto object-contain z-20 pointer-events-none'
+            className='absolute w-[40%] bottom-[-0.2%] right-[7.35%] h-auto object-contain z-20 pointer-events-none'
             alt='사람'
           />
 
