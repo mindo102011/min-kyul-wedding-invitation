@@ -1,0 +1,140 @@
+/* 웨딩 달력 커스텀 스타일 */
+.wedding-calendar {
+  --rdp-cell-size: 44px;
+  --rdp-accent-color: #fb7185; /* rose-400 */
+  --rdp-background-color: #fff1f2; /* rose-50 */
+}
+
+.wedding-calendar .rdp {
+  margin: 0;
+  font-family: inherit;
+}
+
+/* 달력 전체 컨테이너 */
+.wedding-calendar .rdp-month {
+  background: linear-gradient(180deg, #fff 0%, #fff9fa 100%);
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(251, 113, 133, 0.1);
+}
+
+/* 헤더 (년월 표시) */
+.wedding-calendar .rdp-caption {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 20px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid #fecdd3; /* rose-200 */
+}
+
+.wedding-calendar .rdp-caption_label {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: #374151; /* gray-700 */
+  letter-spacing: 0.05em;
+}
+
+/* 요일 헤더 */
+.wedding-calendar .rdp-head_cell {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #9ca3af; /* gray-400 */
+  padding: 8px 0;
+  text-transform: uppercase;
+}
+
+/* 일요일 빨간색 */
+.wedding-calendar .rdp-head_row th:first-child {
+  color: #fb7185; /* rose-400 */
+}
+
+/* 토요일 파란색 */
+.wedding-calendar .rdp-head_row th:last-child {
+  color: #60a5fa; /* blue-400 */
+}
+
+/* 날짜 셀 */
+.wedding-calendar .rdp-cell {
+  padding: 2px;
+}
+
+.wedding-calendar .rdp-day {
+  width: 40px;
+  height: 40px;
+  font-size: 0.9rem;
+  color: #4b5563; /* gray-600 */
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+/* 일요일 날짜 */
+.wedding-calendar .rdp-row td:first-child .rdp-day {
+  color: #fb7185; /* rose-400 */
+}
+
+/* 토요일 날짜 */
+.wedding-calendar .rdp-row td:last-child .rdp-day {
+  color: #60a5fa; /* blue-400 */
+}
+
+/* 호버 효과 */
+.wedding-calendar .rdp-day:hover:not(.wedding-day) {
+  background-color: #fff1f2; /* rose-50 */
+}
+
+/* 결혼식 날짜 (선택된 날짜) */
+.wedding-calendar .rdp-day.wedding-day,
+.wedding-calendar .rdp-day_selected,
+.wedding-calendar .rdp-day.rdp-day_selected {
+  background: linear-gradient(135deg, #fb7185 0%, #f472b6 100%); /* rose-400 to pink-400 */
+  color: white !important;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(251, 113, 133, 0.4);
+  transform: scale(1.1);
+  position: relative;
+}
+
+/* 결혼식 날짜 하트 장식 */
+.wedding-calendar .rdp-day.wedding-day::after,
+.wedding-calendar .rdp-day_selected::after {
+  content: '♥';
+  position: absolute;
+  bottom: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 10px;
+  color: #fb7185;
+}
+
+/* 오늘 날짜 스타일 제거 (결혼식 날짜와 충돌 방지) */
+.wedding-calendar .rdp-day_today:not(.rdp-day_selected) {
+  font-weight: normal;
+  background: transparent;
+}
+
+/* 비활성 네비게이션 숨기기 */
+.wedding-calendar .rdp-nav {
+  display: none;
+}
+
+/* 외부 날짜 숨기기 */
+.wedding-calendar .rdp-day_outside {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* 애니메이션 */
+@keyframes pulse-heart {
+  0%,
+  100% {
+    transform: translateX(-50%) scale(1);
+  }
+  50% {
+    transform: translateX(-50%) scale(1.2);
+  }
+}
+
+.wedding-calendar .rdp-day.wedding-day::after,
+.wedding-calendar .rdp-day_selected::after {
+  animation: pulse-heart 1.5s ease-in-out infinite;
+}
