@@ -1,0 +1,27 @@
+@font-face {
+  font-family: 'Blacksword';
+  src: url('/fonts/Blacksword.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'FranciscoDemo';
+  src: url('/fonts/FranciscoDemo.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Matsury Demo';
+  src: url('/fonts/Matsury Demo.ttf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'WhiteAngelica';
+  src: url('/fonts/WhiteAngelica.ttf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
