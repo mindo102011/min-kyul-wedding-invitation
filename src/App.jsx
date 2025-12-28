@@ -170,28 +170,25 @@ function App() {
 
   return (
     <div className='flex justify-center w-full min-h-screen'>
-      <div className='w-full flex flex-col items-center max-w-[640px] h-screen'>
-        <div className='relative w-full bg-[#f5f0eb]'>
+      <div className='w-full flex flex-col items-center max-w-[640px]'>
+        <div className='relative w-full h-screen sm:h-auto bg-[#f5f0eb]'>
           {/* 이미지 */}
           <img
             src='/images/32 0Q0A7334a.jpg'
-            className='object-contain object-[80%_center] w-full h-full sm:object-contain'
+            className='object-cover object-[80%_center] w-full h-full sm:object-contain sm:h-auto'
             alt='이미지'
           />
 
           {/* 이미지 위 텍스트 - Our Wedding Day */}
           <motion.div
-            className='absolute text-center text-yellow-200 top-[27%] left-0 right-0 mx-auto w-full'
+            className='absolute text-center text-yellow-200 top-[24%] left-0 right-0 mx-auto w-full'
             variants={containerVariants}
             initial='hidden'
             animate='visible'
             style={{ opacity: weddingOpacity }}
           >
             {['Our', 'Wedding', 'Day'].map((word, wordIndex) => (
-              <motion.p
-                key={wordIndex}
-                className='text-7xl sm:text-9xl md:text-9xl lg:text-9xl tracking-[0.05em] flex justify-center'
-              >
+              <motion.p key={wordIndex} className='text-7xl sm:text-8xl tracking-[0.05em] flex justify-center'>
                 {word.split('').map((char, charIndex) => (
                   <motion.span key={charIndex} variants={letterVariants} style={{ fontFamily: 'Blacksword' }}>
                     {char}
@@ -201,11 +198,11 @@ function App() {
             ))}
           </motion.div>
 
-          <img
+          {/* <img
             src='/images/people.png'
             className='absolute w-[40%] bottom-[-0.2%] right-[7.35%] h-auto object-contain z-20 pointer-events-none'
             alt='사람'
-          />
+          /> */}
 
           {/* 년도 ----- 날짜 표시 */}
           <div className='absolute z-50 flex items-center justify-center gap-4 font-bold text-yellow-200 -translate-x-1/2 bottom-4 left-1/2 whitespace-nowrap'>
@@ -231,16 +228,17 @@ function App() {
           </div>
         )}
         {/* 인사말 */}
-
-        <div className='z-40 w-full pt-10 pb-20 text-center bg-white'>
+        <div className='z-40 w-full pt-20 pb-20 text-center bg-white'>
           <motion.div
             initial={{ opacity: 0, y: 60 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
           >
-            <span className='block mb-8 text-2xl leading-loose text-gray-700'>Invitation</span>
-            <p className='text-lg leading-loose text-gray-700'>
+            <span className='block mb-8 text-xl leading-loose text-gray-700' style={{ fontFamily: 'WhiteAngelica' }}>
+              Invitation
+            </span>
+            <p className='text-base leading-loose text-gray-700'>
               늦가을의 설렘으로 만나
               <br />
               다섯 번의 겨울을 나란히 걸었습니다.
@@ -255,20 +253,40 @@ function App() {
             </p>
           </motion.div>
         </div>
-        <div className='relative w-full'>
-          {/* 이미지 */}
-          <img src='/images/gallery5.jpg' className='object-contain w-full h-auto' alt='이미지' />
-        </div>
-        {/* 이미지2 아래 영역 - 신랑신부 소개 */}
-        <div className='w-full py-20 text-lg leading-loose text-center text-gray-700 bg-white'>
-          <span className='block '>김 홍만 · 이 정안 의 아들 산결</span>
-          <span className='block'>이 승화 · 강 경아 의 딸 수민</span>
+        {/* 신랑신부 소개 - 그라데이션 오버레이 */}
+        <div className='w-full'>
+          <div className='relative'>
+            <img src='/images/1-2HS_0857a.jpg' className='object-contain w-full h-auto' alt='신랑' />
+            {/* 상단 그라데이션 - 흰색에서 투명으로 */}
+            <div className='absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-white to-transparent' />
+            {/* 하단 그라데이션 - 텍스트용 */}
+            <div className='absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black/70 via-black/40 to-transparent' />{' '}
+            <div className='absolute text-left left-8 bottom-6'>
+              <span className='text-xs tracking-[0.3em] text-white/70'>GROOM</span>
+              <p className='mt-1 text-base text-white'>
+                김홍만 · 이정안 의 아들 <span className='font-medium'>산결</span>
+              </p>
+            </div>
+          </div>
+          <div className='relative'>
+            <img src='/images/1-1HS_0907a.jpg' className='object-contain w-full h-auto' alt='신부' />
+            {/* 하단 그라데이션 - 텍스트용 어두운 영역 */}
+            <div className='absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black/70 via-black/40 to-transparent' />
+            {/* 맨 하단 흰색 페이드 */}
+            <div className='absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-white to-transparent' />
+            <div className='absolute text-right right-8 bottom-10'>
+              <span className='text-xs tracking-[0.3em] text-white/70'>BRIDE</span>
+              <p className='mt-1 text-base text-white'>
+                이승화 · 강경아 의 딸 <span className='font-medium'>수민</span>
+              </p>
+            </div>
+          </div>
         </div>
         {/* 예식 안내 */}
-        <div className='w-full px-8 pb-10 text-lg leading-loose text-center text-gray-700 bg-white'>
-          <span className='block'>예식 안내</span>
-          <span className='block'>2026년 3월 22일 일요일 오후 2시 30분</span>
-          <span className='block'>로얄파크컨벤션 1층 파크홀</span>
+        <div className='w-full px-8 py-20 text-lg leading-loose text-center text-gray-700 bg-white'>
+          <span className='block mb-4'>예식 안내</span>
+          <span className='block font-bold'>2026년 3월 22일 일요일 오후 2시 30분</span>
+          <span className='block font-bold'>로얄파크컨벤션 1층 파크홀</span>
         </div>
 
         {/* 달력 */}
@@ -280,7 +298,7 @@ function App() {
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
           >
-            <h3 className='mb-6 text-xl font-light tracking-widest text-center text-gray-600'>2026.03</h3>
+            <h3 className='mb-6 text-xl font-light tracking-widest text-center text-gray-600'>2026.03.22</h3>
             <div className='grid grid-cols-7 gap-1 text-center'>
               {/* 요일 헤더 */}
               {['일', '월', '화', '수', '목', '금', '토'].map((day, index) => (
@@ -306,9 +324,23 @@ function App() {
                   >
                     {isWeddingDay ? (
                       <div className='relative'>
-                        <div className='flex items-center justify-center w-10 h-10 font-semibold text-white rounded-full bg-rose-400'>
+                        <motion.div
+                          className='flex items-center justify-center w-10 h-10 font-semibold text-white rounded-full bg-rose-400'
+                          animate={{
+                            boxShadow: [
+                              '0 0 0 0 rgba(251, 113, 133, 0.7)',
+                              '0 0 0 10px rgba(251, 113, 133, 0)',
+                              '0 0 0 0 rgba(251, 113, 133, 0)',
+                            ],
+                          }}
+                          transition={{
+                            duration: 1.5,
+                            repeat: Infinity,
+                            ease: 'easeOut',
+                          }}
+                        >
                           {date}
-                        </div>
+                        </motion.div>
                         <div className='absolute w-full text-[10px] text-rose-400 -bottom-4 left-1/2 -translate-x-1/2 whitespace-nowrap'>
                           PM 2:30
                         </div>
@@ -323,15 +355,17 @@ function App() {
           </motion.div>
         </div>
         {/* 지도 영역 */}
-        <div className='flex flex-col w-full gap-4 px-8 pb-10 text-lg leading-loose text-center text-gray-700 bg-white'>
-          <span className='block'>오시는 길</span>
-          <img src='/images/map.svg' alt='약도' />
-          <div className='flex justify-center gap-3 mt-2'>
+        <div className='flex flex-col w-full gap-4 pb-10 text-lg leading-loose text-center text-gray-700 bg-white'>
+          <span className='block text-xl' style={{ fontFamily: 'WhiteAngelica' }}>
+            Location
+          </span>
+          <img src='/images/map.png' alt='약도' />
+          <div className='flex justify-center gap-3 px-4 mt-2'>
             <a
               href='https://map.naver.com/v5/search/로얄파크컨벤션'
               target='_blank'
               rel='noopener noreferrer'
-              className='flex items-center gap-2 px-4 py-2 text-sm text-gray-600 bg-white border border-gray-300 rounded-lg'
+              className='flex items-center justify-center flex-1 gap-2 py-2 text-sm text-gray-600 bg-white border border-gray-300 rounded-lg'
             >
               <img src='/images/navermap_logo.png' alt='네이버' className='w-4 h-4' />
               네이버
@@ -340,7 +374,7 @@ function App() {
               href='https://map.kakao.com/link/search/로얄파크컨벤션'
               target='_blank'
               rel='noopener noreferrer'
-              className='flex items-center gap-2 px-4 py-2 text-sm text-gray-600 bg-white border border-gray-300 rounded-lg'
+              className='flex items-center justify-center flex-1 gap-2 py-2 text-sm text-gray-600 bg-white border border-gray-300 rounded-lg'
             >
               <img src='/images/kakaomap_logo.png' alt='카카오' className='w-4 h-4' />
               카카오
@@ -349,7 +383,7 @@ function App() {
               href='https://tmap.life/로얄파크컨벤션'
               target='_blank'
               rel='noopener noreferrer'
-              className='flex items-center gap-2 px-4 py-2 text-sm text-gray-600 bg-white border border-gray-300 rounded-lg'
+              className='flex items-center justify-center flex-1 gap-2 py-2 text-sm text-gray-600 bg-white border border-gray-300 rounded-lg'
             >
               <img src='/images/tmap_logo.svg' alt='티맵' className='w-4 h-4' />
               티맵
@@ -364,7 +398,12 @@ function App() {
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
           > */}
-          <h3 className='mb-8 text-2xl tracking-widest text-center text-gray-600'>Gallery</h3>
+          <h3
+            className='mb-8 text-xl tracking-widest text-center text-gray-600'
+            style={{ fontFamily: 'WhiteAngelica' }}
+          >
+            Gallery
+          </h3>
           <WeddingGallery />
           {/* </motion.div> */}
         </div>
