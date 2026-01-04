@@ -6,8 +6,8 @@ const accountData = {
     label: '신랑측 계좌번호',
     accounts: [
       { relation: '신랑', name: '김산결', bank: '우리은행', account: '1002641111539' },
-      { relation: '신랑 아버지', name: '김홍만', bank: '국민은행', account: '000000-00-000000' },
-      { relation: '신랑 어머니', name: '이정안', bank: '신한은행', account: '000-000-000000' },
+      { relation: '신랑 아버지', name: '김홍만', bank: '하나은행', account: '52891024385807' },
+      { relation: '신랑 어머니', name: '이정안', bank: '하나은행', account: '01085014748207' },
     ],
   },
   bride: {
@@ -93,7 +93,7 @@ function AccountAccordion({ type, data }) {
                 >
                   <div className='flex items-center justify-between'>
                     <div className='flex flex-col gap-1'>
-                      <span className='text-xs text-gray-400'>{account.relation}</span>
+                      <span className='text-xs font-semibold text-gray-500'>{account.relation}</span>
                       <span className='text-sm font-medium text-gray-700'>{account.name}</span>
                       <span className='text-sm text-gray-600'>
                         {account.bank} {account.account}
