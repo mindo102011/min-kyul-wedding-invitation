@@ -259,7 +259,7 @@ function App() {
           />
           {/* Our Wedding Day 텍스트 */}
           <motion.div
-            className='absolute text-center text-yellow-200 top-[24%] left-0 right-0 mx-auto w-full'
+            className='absolute text-center text-yellow-200 top-[20%] left-0 right-0 mx-auto w-full'
             variants={containerVariants}
             initial='hidden'
             animate='visible'

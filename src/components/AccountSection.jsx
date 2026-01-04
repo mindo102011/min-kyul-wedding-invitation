@@ -5,7 +5,7 @@ const accountData = {
   groom: {
     label: '신랑측 계좌번호',
     accounts: [
-      { relation: '신랑', name: '김산결', bank: '카카오뱅크', account: '3333-00-0000000' },
+      { relation: '신랑', name: '김산결', bank: '우리은행', account: '1002641111539' },
       { relation: '신랑 아버지', name: '김홍만', bank: '국민은행', account: '000000-00-000000' },
       { relation: '신랑 어머니', name: '이정안', bank: '신한은행', account: '000-000-000000' },
     ],
@@ -13,9 +13,9 @@ const accountData = {
   bride: {
     label: '신부측 계좌번호',
     accounts: [
-      { relation: '신부', name: '이수민', bank: '카카오뱅크', account: '3333-00-0000000' },
-      { relation: '신부 아버지', name: '이승화', bank: '우리은행', account: '0000-000-000000' },
-      { relation: '신부 어머니', name: '강경아', bank: '농협은행', account: '000-0000-0000-00' },
+      { relation: '신부', name: '이수민', bank: '하나은행', account: '85391019196207' },
+      { relation: '신부 아버지', name: '이승화', bank: '우리은행', account: '022210209527' },
+      { relation: '신부 어머니', name: '강경아', bank: '우리은행', account: '314210229044' },
     ],
   },
 }
