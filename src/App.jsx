@@ -5,6 +5,7 @@ import WeddingGallery from './components/WeddingGallery'
 import { galleryImages } from './constants/galleryImages'
 import AccountSection from './components/AccountSection'
 import FooterSection from './components/FooterSection'
+import RsvpSection from './components/RsvpSection'
 
 function getGreeting() {
   if (typeof window === 'undefined') return null
@@ -458,6 +459,7 @@ function App() {
         </div>
         {/* 계좌번호 안내 */}
         <AccountSection />
+        <RsvpSection />
         <FooterSection />
       </div>
     </div>
