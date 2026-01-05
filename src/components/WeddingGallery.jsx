@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect, memo } from 'react'
+import { useState, useCallback, useEffect, memo, useRef } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
 import { galleryImages } from '../constants/galleryImages'
 
@@ -14,6 +14,8 @@ function WeddingGallery() {
     containScroll: 'trimSnaps',
   })
 
+  const touchStartY = useRef(0)
+
   const openModal = useCallback((index) => {
     setSelectedImage(index)
     setCurrentIndex(index)
@@ -24,6 +26,21 @@ function WeddingGallery() {
     setSelectedImage(null)
     document.body.style.overflow = ''
   }, [])
+
+  // 아래로 스와이프 감지
+  const handleTouchStart = useCallback((e) => {
+    touchStartY.current = e.touches[0].clientY
+  }, [])
+
+  const handleTouchEnd = useCallback(
+    (e) => {
+      const deltaY = e.changedTouches[0].clientY - touchStartY.current
+      if (deltaY > 80) {
+        closeModal()
+      }
+    },
+    [closeModal],
+  )
 
   useEffect(() => {
     if (selectedImage !== null) {
@@ -80,7 +97,12 @@ function WeddingGallery() {
 
       {selectedImage !== null && (
         <div className='fixed inset-0 z-50 flex justify-center bg-black' onClick={closeModal}>
-          <div className='relative w-full max-w-[640px] h-full' onClick={(e) => e.stopPropagation()}>
+          <div
+            className='relative w-full max-w-[640px] h-full'
+            onClick={(e) => e.stopPropagation()}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+          >
             <button
               onClick={closeModal}
               className='absolute z-10 flex items-center justify-center w-10 h-10 text-3xl text-white top-4 right-4'
