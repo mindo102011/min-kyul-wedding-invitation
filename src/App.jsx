@@ -2,7 +2,6 @@ import { useScroll, useTransform, motion } from 'framer-motion'
 import { useState, useEffect, useRef } from 'react'
 import confetti from 'canvas-confetti'
 import WeddingGallery from './components/WeddingGallery'
-import { galleryImages } from './constants/galleryImages'
 import AccountSection from './components/AccountSection'
 import FooterSection from './components/FooterSection'
 import RsvpSection from './components/RsvpSection'
@@ -20,7 +19,13 @@ function getGreeting() {
   const lastCharCode = lastChar.charCodeAt(0)
   const hasFinalConsonant = (lastCharCode - 44032) % 28 !== 0
   const suffix = hasFinalConsonant ? '아' : '야'
-  const action = type === 'bride' ? '시집' : '장가'
+
+  const actionMap = {
+    bride: '시집',
+    groom: '장가',
+    both: '결혼한다!',
+  }
+  const action = actionMap[type] || '결혼한다!'
 
   return { name, suffix, action }
 }
@@ -75,13 +80,13 @@ function fireConfetti() {
 
 function App() {
   const [fontsLoaded, setFontsLoaded] = useState(false)
-  const [galleryLoaded, setGalleryLoaded] = useState(false)
+  const [heroLoaded, setHeroLoaded] = useState(false)
   const [introVisible, setIntroVisible] = useState(!!greeting)
   const [introFading, setIntroFading] = useState(false)
   const confettiFiredRef = useRef(false)
   const { scrollYProgress } = useScroll()
 
-  const isReady = fontsLoaded && galleryLoaded
+  const isReady = fontsLoaded && heroLoaded
 
   const containerVariants = {
     hidden: { opacity: 1 },
@@ -106,31 +111,17 @@ function App() {
 
   const weddingOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0])
 
-  // 폰트 + 갤러리 로딩
+  // 폰트 + 히어로 이미지 로딩
   useEffect(() => {
     document.fonts.ready.then(() => {
       setFontsLoaded(true)
     })
 
-    let loadedCount = 0
-    const totalImages = galleryImages.length
-
-    galleryImages.forEach((src) => {
-      const img = new Image()
-      img.onload = img.onerror = () => {
-        loadedCount++
-        if (loadedCount === totalImages) {
-          setGalleryLoaded(true)
-        }
-      }
-      img.src = src
-      if (img.complete) {
-        loadedCount++
-        if (loadedCount === totalImages) {
-          setGalleryLoaded(true)
-        }
-      }
-    })
+    // 히어로 이미지만 프리로드
+    const heroImg = new Image()
+    heroImg.onload = () => setHeroLoaded(true)
+    heroImg.onerror = () => setHeroLoaded(true) // 에러 시에도 진행
+    heroImg.src = '/images/32 0Q0A7334a.jpg'
   }, [])
 
   // 인트로 화면에서 스크롤 감지
@@ -205,7 +196,10 @@ function App() {
   }
 
   // 인트로 화면
+  // 인트로 화면
   if (introVisible) {
+    const isBoth = new URLSearchParams(window.location.search).get('type') === 'both'
+
     return (
       <motion.div
         className='fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#fdfbf7]'
@@ -219,8 +213,18 @@ function App() {
           className='text-center'
         >
           <p className='text-3xl leading-relaxed text-gray-600' style={{ fontFamily: '나눔손글씨_강부장님체' }}>
-            {greeting.name}
-            {greeting.suffix},<br />나 {greeting.action}간다 !
+            {isBoth ? (
+              <>
+                {greeting.name}
+                {greeting.suffix},<br />
+                우리 결혼한다 !
+              </>
+            ) : (
+              <>
+                {greeting.name}
+                {greeting.suffix},<br />나 {greeting.action}간다 !
+              </>
+            )}
           </p>
         </motion.div>
 
@@ -339,7 +343,7 @@ function App() {
         </div>
 
         {/* 예식 안내 */}
-        <div className='w-full px-8 pt-20 pb-10 text-lg leading-loose text-center text-gray-700 bg-white'>
+        <div className='w-full px-8 pt-20 pb-10 text-base leading-loose text-center text-gray-700 bg-white'>
           <span className='block mb-8' style={{ fontFamily: 'WhiteAngelica' }}>
             Information
           </span>

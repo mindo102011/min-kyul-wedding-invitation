@@ -74,13 +74,7 @@ function RsvpSection() {
         <h3 className='mb-4 text-xl text-center text-gray-600' style={{ fontFamily: 'WhiteAngelica' }}>
           Attendance
         </h3>
-        <p className='mb-8 text-sm leading-relaxed text-center text-gray-500'>
-          축하의 마음으로 참석해주시는 분들을 위해
-          <br />
-          식사 준비를 하고 있습니다.
-          <br />
-          참석 여부를 알려주시면 감사하겠습니다.
-        </p>
+        <p className='mb-8 text-sm leading-relaxed text-center text-gray-500'>참석 여부를 알려주세요.</p>
 
         <form
           action={GOOGLE_SCRIPT_URL}

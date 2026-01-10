@@ -5,7 +5,7 @@ export default function FooterSection() {
     <div className='w-full bg-white'>
       {/* 텍스트 영역 */}
       <motion.div
-        className='px-6 pt-40 pb-16 text-center'
+        className='px-6 pt-20 pb-16 text-center'
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.5 }}
