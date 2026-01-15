@@ -9,7 +9,6 @@ export const galleryImages = [
   '/images/gallery6.jpg',
   '/images/gallery7.jpg',
   '/images/gallery9.jpg',
-  '/images/24-2 0Q0A7232a.jpg',
   '/images/gallery11.jpg',
   '/images/gallery5.jpg',
 ]

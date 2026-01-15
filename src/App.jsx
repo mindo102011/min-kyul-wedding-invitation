@@ -402,7 +402,7 @@ function App() {
                           {date}
                         </motion.div>
                         <div className='absolute w-full text-[10px] text-rose-400 -bottom-4 left-1/2 -translate-x-1/2 whitespace-nowrap'>
-                          PM 2:30
+                          2:30 PM
                         </div>
                       </div>
                     ) : (
