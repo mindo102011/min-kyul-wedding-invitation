@@ -5,6 +5,7 @@ import WeddingGallery from './components/WeddingGallery'
 import AccountSection from './components/AccountSection'
 import FooterSection from './components/FooterSection'
 import RsvpSection from './components/RsvpSection'
+import { Info, MapPin, Navigation } from 'lucide-react'
 
 function getGreeting() {
   if (typeof window === 'undefined') return null
@@ -450,6 +451,20 @@ function App() {
               티맵
             </a>
           </div>
+          <a
+            href='https://bright-sumac-851.notion.site/ATM-32705de127338043b942f54a96b1654b'
+            target='_blank'
+            rel='noopener noreferrer'
+            className='flex items-center justify-center gap-2 py-4 mx-4 mt-3 text-sm text-gray-600 border border-gray-200 rounded-lg bg-gray-50'
+          >
+            <span>
+              <MapPin />
+            </span>
+            <span className='font-bold'>오시는 길 · 주차장 · ATM 위치 안내 보기</span>
+            <svg className='w-3.5 h-3.5 text-gray-400' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+              <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M9 5l7 7-7 7' />
+            </svg>
+          </a>
         </div>
         {/* 웨딩 사진 갤러리 */}
         <div className='w-full py-16 bg-white'>
